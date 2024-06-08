@@ -5,15 +5,15 @@
 [x] products block
 [x] setup supabase
 [x] remove block mock data and cleanup pages
-[] theme and light/dark mode
+[x] theme and light/dark mode
 [] side nav bar
 [] top nav bar
 
 [] auth clerk
 
 Products
-[] products table
-[] fetch products from supabase
+[x] basic products table
+[x] fetch products from supabase
 [] add product form
 [] add product server action
 [] delete product

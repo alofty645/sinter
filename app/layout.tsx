@@ -29,6 +29,9 @@ import {
   DropdownMenuCheckboxItem,
 } from "@/components/ui/dropdown-menu";
 
+import { ThemeProvider } from "@/components/ui/theme-provider";
+import { ModeToggle } from "@/components/ui/modetoggle";
+
 export const metadata = {
   title: "Sinter",
   description: "Sinter",
@@ -42,216 +45,228 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <div className="bg-muted/40 flex min-h-screen w-full flex-col">
-        <body className="bg-muted/40 flex min-h-screen w-full flex-col">
-          <div className="bg-muted/40 flex min-h-screen w-full flex-col">
-            <aside className="bg-background fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r sm:flex">
-              <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
-                <TooltipProvider>
-                  <Link
-                    className="bg-primary text-primary-foreground group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full text-lg font-semibold md:h-8 md:w-8 md:text-base"
-                    href="#"
-                  >
-                    <Package2Icon className="h-4 w-4 transition-all group-hover:scale-110" />
-                    <span className="sr-only">Acme Inc</span>
-                  </Link>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Link
-                        className="text-muted-foreground hover:text-foreground flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8"
-                        href="#"
-                      >
-                        <HomeIcon className="h-5 w-5" />
-                        <span className="sr-only">Dashboard</span>
-                      </Link>
-                    </TooltipTrigger>
-                    <TooltipContent side="right">Dashboard</TooltipContent>
-                  </Tooltip>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Link
-                        className="text-muted-foreground hover:text-foreground flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8"
-                        href="/orders"
-                      >
-                        <ShoppingCartIcon className="h-5 w-5" />
-                        <span className="sr-only">Orders</span>
-                      </Link>
-                    </TooltipTrigger>
-                    <TooltipContent side="right">Orders</TooltipContent>
-                  </Tooltip>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Link
-                        className="text-muted-foreground hover:text-foreground flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8"
-                        href="/products"
-                      >
-                        <PackageIcon className="h-5 w-5" />
-                        <span className="sr-only">Products</span>
-                      </Link>
-                    </TooltipTrigger>
-                    <TooltipContent side="right">Products</TooltipContent>
-                  </Tooltip>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Link
-                        className="text-muted-foreground hover:text-foreground flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8"
-                        href="/contacts"
-                      >
-                        <UsersIcon className="h-5 w-5" />
-                        <span className="sr-only">Contacts</span>
-                      </Link>
-                    </TooltipTrigger>
-                    <TooltipContent side="right">Contacts</TooltipContent>
-                  </Tooltip>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Link
-                        className="text-muted-foreground hover:text-foreground flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8"
-                        href="#"
-                      >
-                        <LineChartIcon className="h-5 w-5" />
-                        <span className="sr-only">Analytics</span>
-                      </Link>
-                    </TooltipTrigger>
-                    <TooltipContent side="right">Analytics</TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-              </nav>
-              <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Link
-                        className="text-muted-foreground hover:text-foreground flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8"
-                        href="#"
-                      >
-                        <SettingsIcon className="h-5 w-5" />
-                        <span className="sr-only">Settings</span>
-                      </Link>
-                    </TooltipTrigger>
-                    <TooltipContent side="right">Settings</TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-              </nav>
-            </aside>
-            <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
-              <header className="bg-background sticky top-0 z-30 flex h-14 items-center gap-4 border-b px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
-                <Sheet>
-                  <SheetTrigger asChild>
-                    <Button className="sm:hidden" size="icon" variant="outline">
-                      <PanelLeftIcon className="h-5 w-5" />
-                      <span className="sr-only">Toggle Menu</span>
-                    </Button>
-                  </SheetTrigger>
-                  <SheetContent className="sm:max-w-xs" side="left">
-                    <nav className="grid gap-6 text-lg font-medium">
-                      <Link
-                        className="bg-primary text-primary-foreground group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full text-lg font-semibold md:text-base"
-                        href="#"
-                      >
-                        <Package2Icon className="h-5 w-5 transition-all group-hover:scale-110" />
-                        <span className="sr-only">Acme Inc</span>
-                      </Link>
-                      <Link
-                        className="text-muted-foreground hover:text-foreground flex items-center gap-4 px-2.5"
-                        href="#"
-                      >
-                        <HomeIcon className="h-5 w-5" />
-                        Dashboard
-                      </Link>
-                      <Link
-                        className="text-muted-foreground hover:text-foreground flex items-center gap-4 px-2.5"
-                        href="#"
-                      >
-                        <ShoppingCartIcon className="h-5 w-5" />
-                        Orders
-                      </Link>
-                      <Link
-                        className="text-foreground flex items-center gap-4 px-2.5"
-                        href="#"
-                      >
-                        <PackageIcon className="h-5 w-5" />
-                        Products
-                      </Link>
-                      <Link
-                        className="text-muted-foreground hover:text-foreground flex items-center gap-4 px-2.5"
-                        href="#"
-                      >
-                        <UsersIcon className="h-5 w-5" />
-                        Customers
-                      </Link>
-                      <Link
-                        className="text-muted-foreground hover:text-foreground flex items-center gap-4 px-2.5"
-                        href="#"
-                      >
-                        <LineChartIcon className="h-5 w-5" />
-                        Settings
-                      </Link>
-                    </nav>
-                  </SheetContent>
-                </Sheet>
-                <Breadcrumb className="hidden md:flex">
-                  <BreadcrumbList>
-                    <BreadcrumbItem>
-                      <BreadcrumbLink asChild>
-                        <Link href="#">Dashboard</Link>
-                      </BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator />
-                    <BreadcrumbItem>
-                      <BreadcrumbLink asChild>
-                        <Link href="#">Products</Link>
-                      </BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator />
-                    <BreadcrumbItem>
-                      <BreadcrumbPage>All Products</BreadcrumbPage>
-                    </BreadcrumbItem>
-                  </BreadcrumbList>
-                </Breadcrumb>
-                <div className="relative ml-auto flex-1 md:grow-0">
-                  <SearchIcon className="text-muted-foreground absolute left-2.5 top-2.5 h-4 w-4" />
-                  <Input
-                    className="bg-background w-full rounded-lg pl-8 md:w-[200px] lg:w-[336px]"
-                    placeholder="Search..."
-                    type="search"
-                  />
-                </div>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button
-                      className="overflow-hidden rounded-full"
-                      size="icon"
-                      variant="outline"
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+      >
+        <div className="bg-muted/40 flex min-h-screen w-full flex-col">
+          <body className="bg-muted/40 flex min-h-screen w-full flex-col">
+            <div className="bg-muted/40 flex min-h-screen w-full flex-col">
+              <aside className="bg-background fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r sm:flex">
+                <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
+                  <TooltipProvider>
+                    <Link
+                      className="bg-primary text-primary-foreground group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full text-lg font-semibold md:h-8 md:w-8 md:text-base"
+                      href="#"
                     >
-                      <img
-                        alt="Avatar"
+                      <Package2Icon className="h-4 w-4 transition-all group-hover:scale-110" />
+                      <span className="sr-only">Acme Inc</span>
+                    </Link>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Link
+                          className="text-muted-foreground hover:text-foreground flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8"
+                          href="#"
+                        >
+                          <HomeIcon className="h-5 w-5" />
+                          <span className="sr-only">Dashboard</span>
+                        </Link>
+                      </TooltipTrigger>
+                      <TooltipContent side="right">Dashboard</TooltipContent>
+                    </Tooltip>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Link
+                          className="text-muted-foreground hover:text-foreground flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8"
+                          href="/orders"
+                        >
+                          <ShoppingCartIcon className="h-5 w-5" />
+                          <span className="sr-only">Orders</span>
+                        </Link>
+                      </TooltipTrigger>
+                      <TooltipContent side="right">Orders</TooltipContent>
+                    </Tooltip>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Link
+                          className="text-muted-foreground hover:text-foreground flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8"
+                          href="/products"
+                        >
+                          <PackageIcon className="h-5 w-5" />
+                          <span className="sr-only">Products</span>
+                        </Link>
+                      </TooltipTrigger>
+                      <TooltipContent side="right">Products</TooltipContent>
+                    </Tooltip>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Link
+                          className="text-muted-foreground hover:text-foreground flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8"
+                          href="/contacts"
+                        >
+                          <UsersIcon className="h-5 w-5" />
+                          <span className="sr-only">Contacts</span>
+                        </Link>
+                      </TooltipTrigger>
+                      <TooltipContent side="right">Contacts</TooltipContent>
+                    </Tooltip>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Link
+                          className="text-muted-foreground hover:text-foreground flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8"
+                          href="#"
+                        >
+                          <LineChartIcon className="h-5 w-5" />
+                          <span className="sr-only">Analytics</span>
+                        </Link>
+                      </TooltipTrigger>
+                      <TooltipContent side="right">Analytics</TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </nav>
+                <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Link
+                          className="text-muted-foreground hover:text-foreground flex h-9 w-9 items-center justify-center rounded-lg transition-colors md:h-8 md:w-8"
+                          href="#"
+                        >
+                          <SettingsIcon className="h-5 w-5" />
+                          <span className="sr-only">Settings</span>
+                        </Link>
+                      </TooltipTrigger>
+                      <TooltipContent side="right">Settings</TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </nav>
+              </aside>
+              <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
+                <header className="bg-background sticky top-0 z-30 flex h-14 items-center gap-4 border-b px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
+                  <Sheet>
+                    <SheetTrigger asChild>
+                      <Button
+                        className="sm:hidden"
+                        size="icon"
+                        variant="outline"
+                      >
+                        <PanelLeftIcon className="h-5 w-5" />
+                        <span className="sr-only">Toggle Menu</span>
+                      </Button>
+                    </SheetTrigger>
+                    <SheetContent className="sm:max-w-xs" side="left">
+                      <nav className="grid gap-6 text-lg font-medium">
+                        <Link
+                          className="bg-primary text-primary-foreground group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full text-lg font-semibold md:text-base"
+                          href="#"
+                        >
+                          <Package2Icon className="h-5 w-5 transition-all group-hover:scale-110" />
+                          <span className="sr-only">Acme Inc</span>
+                        </Link>
+                        <Link
+                          className="text-muted-foreground hover:text-foreground flex items-center gap-4 px-2.5"
+                          href="#"
+                        >
+                          <HomeIcon className="h-5 w-5" />
+                          Dashboard
+                        </Link>
+                        <Link
+                          className="text-muted-foreground hover:text-foreground flex items-center gap-4 px-2.5"
+                          href="#"
+                        >
+                          <ShoppingCartIcon className="h-5 w-5" />
+                          Orders
+                        </Link>
+                        <Link
+                          className="text-foreground flex items-center gap-4 px-2.5"
+                          href="#"
+                        >
+                          <PackageIcon className="h-5 w-5" />
+                          Products
+                        </Link>
+                        <Link
+                          className="text-muted-foreground hover:text-foreground flex items-center gap-4 px-2.5"
+                          href="#"
+                        >
+                          <UsersIcon className="h-5 w-5" />
+                          Customers
+                        </Link>
+                        <Link
+                          className="text-muted-foreground hover:text-foreground flex items-center gap-4 px-2.5"
+                          href="#"
+                        >
+                          <LineChartIcon className="h-5 w-5" />
+                          Settings
+                        </Link>
+                      </nav>
+                    </SheetContent>
+                  </Sheet>
+                  <Breadcrumb className="hidden md:flex">
+                    <BreadcrumbList>
+                      <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                          <Link href="#">Dashboard</Link>
+                        </BreadcrumbLink>
+                      </BreadcrumbItem>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        <BreadcrumbLink asChild>
+                          <Link href="#">Products</Link>
+                        </BreadcrumbLink>
+                      </BreadcrumbItem>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        <BreadcrumbPage>All Products</BreadcrumbPage>
+                      </BreadcrumbItem>
+                    </BreadcrumbList>
+                  </Breadcrumb>
+                  <div className="relative ml-auto flex-1 md:grow-0">
+                    <SearchIcon className="text-muted-foreground absolute left-2.5 top-2.5 h-4 w-4" />
+                    <Input
+                      className="bg-background w-full rounded-lg pl-8 md:w-[200px] lg:w-[336px]"
+                      placeholder="Search..."
+                      type="search"
+                    />
+                  </div>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button
                         className="overflow-hidden rounded-full"
-                        height={36}
-                        src="/placeholder.svg"
-                        style={{
-                          aspectRatio: "36/36",
-                          objectFit: "cover",
-                        }}
-                        width={36}
-                      />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem>Settings</DropdownMenuItem>
-                    <DropdownMenuItem>Support</DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem>Logout</DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </header>
-              {children}
+                        size="icon"
+                        variant="outline"
+                      >
+                        <img
+                          alt="Avatar"
+                          className="overflow-hidden rounded-full"
+                          height={36}
+                          src="/placeholder.svg"
+                          style={{
+                            aspectRatio: "36/36",
+                            objectFit: "cover",
+                          }}
+                          width={36}
+                        />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem>Settings</DropdownMenuItem>
+                      <DropdownMenuItem>Support</DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem>Logout</DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                  <ModeToggle />
+                </header>
+                {children}
+              </div>
             </div>
-          </div>
-        </body>
-      </div>
+          </body>
+        </div>
+      </ThemeProvider>
     </html>
   );
 }
