@@ -1,11 +1,14 @@
 ## Todo
 
-[] deploy to vercel
+[x] deploy to vercel
 [x] install shad
 [x] products block
-[] setup supabase
+[x] setup supabase
 [x] remove block mock data and cleanup pages
 [] theme and light/dark mode
+[] side nav bar
+[] top nav bar
+
 [] auth clerk
 
 Products
