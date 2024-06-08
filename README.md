@@ -6,9 +6,10 @@
 [x] setup supabase
 [x] remove block mock data and cleanup pages
 [x] theme and light/dark mode
-[] side nav bar
-[] top nav bar
+[x] side nav bar
+[x] top nav bar
 
+[] fix side bar disapearing
 [] auth clerk
 
 Products

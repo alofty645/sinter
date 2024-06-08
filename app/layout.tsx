@@ -203,25 +203,7 @@ export default function RootLayout({
                       </nav>
                     </SheetContent>
                   </Sheet>
-                  <Breadcrumb className="hidden md:flex">
-                    <BreadcrumbList>
-                      <BreadcrumbItem>
-                        <BreadcrumbLink asChild>
-                          <Link href="#">Dashboard</Link>
-                        </BreadcrumbLink>
-                      </BreadcrumbItem>
-                      <BreadcrumbSeparator />
-                      <BreadcrumbItem>
-                        <BreadcrumbLink asChild>
-                          <Link href="#">Products</Link>
-                        </BreadcrumbLink>
-                      </BreadcrumbItem>
-                      <BreadcrumbSeparator />
-                      <BreadcrumbItem>
-                        <BreadcrumbPage>All Products</BreadcrumbPage>
-                      </BreadcrumbItem>
-                    </BreadcrumbList>
-                  </Breadcrumb>
+                  <h1>Logo</h1>
                   <div className="relative ml-auto flex-1 md:grow-0">
                     <SearchIcon className="text-muted-foreground absolute left-2.5 top-2.5 h-4 w-4" />
                     <Input
@@ -335,21 +317,18 @@ function PackageIcon(props) {
 function Package2Icon(props) {
   return (
     <svg
-      {...props}
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="lucide lucide-flame"
     >
-      <path d="M16.5 9.4 7.55 4.24" />
-      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-      <path d="M3.29 7 12 12.01 20.71 7" />
-      <path d="M12 22.08V12" />
+      <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" />
     </svg>
   );
 }
