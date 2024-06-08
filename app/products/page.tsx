@@ -21,7 +21,14 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 
-export default function Homepage() {
+import { createClient } from "@/utils/supabase/server";
+
+export default async function Homepage() {
+  const supabase = createClient();
+  const { data: products } = await supabase.from("products").select();
+
+  console.log(products);
+
   return (
     <div className="bg-muted/40 flex min-h-screen w-full flex-col">
       <div className="flex flex-col sm:gap-4 sm:py-4">
@@ -89,86 +96,47 @@ export default function Homepage() {
                         <TableHead className="hidden md:table-cell">
                           Price
                         </TableHead>
-
-                        {/* <TableHead className="hidden md:table-cell">
-                          Created at
-                        </TableHead> */}
                         <TableHead>
                           <span className="sr-only">Actions</span>
                         </TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      <TableRow>
-                        <TableCell className="font-medium">
-                          Laser Lemonade Machine
-                        </TableCell>
-                        <TableCell>
-                          <Badge variant="outline">Draft</Badge>
-                        </TableCell>
-                        <TableCell className="hidden md:table-cell">
-                          25
-                        </TableCell>
-                        <TableCell className="hidden md:table-cell">
-                          $499.99
-                        </TableCell>
-
-                        <TableCell>
-                          <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                              <Button
-                                aria-haspopup="true"
-                                size="icon"
-                                variant="ghost"
-                              >
-                                <MoveHorizontalIcon className="h-4 w-4" />
-                                <span className="sr-only">Toggle menu</span>
-                              </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end">
-                              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                              <DropdownMenuItem>Edit</DropdownMenuItem>
-                              <DropdownMenuItem>Delete</DropdownMenuItem>
-                            </DropdownMenuContent>
-                          </DropdownMenu>
-                        </TableCell>
-                      </TableRow>
-                      <TableRow>
-                        <TableCell className="font-medium">
-                          Hypernova Headphones
-                        </TableCell>
-                        <TableCell>
-                          <Badge variant="outline">Active</Badge>
-                        </TableCell>
-
-                        <TableCell className="hidden md:table-cell">
-                          100
-                        </TableCell>
-                        <TableCell className="hidden md:table-cell">
-                          $129.99
-                        </TableCell>
-
-                        <TableCell>
-                          <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                              <Button
-                                aria-haspopup="true"
-                                size="icon"
-                                variant="ghost"
-                              >
-                                <MoveHorizontalIcon className="h-4 w-4" />
-                                <span className="sr-only">Toggle menu</span>
-                              </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end">
-                              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                              <DropdownMenuItem>Edit</DropdownMenuItem>
-                              <DropdownMenuItem>Delete</DropdownMenuItem>
-                            </DropdownMenuContent>
-                          </DropdownMenu>
-                        </TableCell>
-                      </TableRow>
-                      <TableRow />
+                      {products.map((product) => (
+                        <TableRow key={product.id}>
+                          <TableCell className="font-medium">
+                            {product.name}
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant="outline">{product.status}</Badge>
+                          </TableCell>
+                          <TableCell className="hidden md:table-cell">
+                            {product.in_stock}
+                          </TableCell>
+                          <TableCell className="hidden md:table-cell">
+                            ${product.price}
+                          </TableCell>
+                          <TableCell>
+                            <DropdownMenu>
+                              <DropdownMenuTrigger asChild>
+                                <Button
+                                  aria-haspopup="true"
+                                  size="icon"
+                                  variant="ghost"
+                                >
+                                  <MoveHorizontalIcon className="h-4 w-4" />
+                                  <span className="sr-only">Toggle menu</span>
+                                </Button>
+                              </DropdownMenuTrigger>
+                              <DropdownMenuContent align="end">
+                                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                                <DropdownMenuItem>Edit</DropdownMenuItem>
+                                <DropdownMenuItem>Delete</DropdownMenuItem>
+                              </DropdownMenuContent>
+                            </DropdownMenu>
+                          </TableCell>
+                        </TableRow>
+                      ))}
                     </TableBody>
                   </Table>
                 </CardContent>
