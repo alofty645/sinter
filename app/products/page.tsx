@@ -44,11 +44,22 @@ import { Input } from "@/components/ui/input";
 import { createClient } from "@/utils/supabase/server";
 import { Select } from "@/components/ui/select";
 
+import { Form } from "@/components/ui/form";
+
+const addproduct = async (formData: FormData) => {
+  "use server";
+  const supabase = createClient();
+  const name = formData.get("name");
+  const status = formData.get("status");
+  const price = formData.get("price");
+  await supabase
+    .from("products")
+    .insert([{ name: name, status: status, price: price }]);
+};
+
 export default async function Homepage() {
   const supabase = createClient();
   const { data: products } = await supabase.from("products").select();
-
-  console.log(products);
 
   return (
     <div className="bg-muted/40 flex min-h-screen w-full flex-col">
@@ -92,6 +103,7 @@ export default async function Homepage() {
                     Export
                   </span>
                 </Button>
+
                 <Sheet>
                   <SheetTrigger asChild>
                     <Button className="h-8 gap-1" size="sm">
@@ -102,44 +114,46 @@ export default async function Homepage() {
                     </Button>
                   </SheetTrigger>
                   <SheetContent>
-                    <SheetHeader>
-                      <SheetTitle>Add a product</SheetTitle>
-                      <SheetDescription></SheetDescription>
-                    </SheetHeader>
-                    <div className="grid gap-4 py-4">
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="name" className="text-right">
-                          Product
-                        </Label>
-                        <Input id="name" className="col-span-3" />
+                    <form action={addproduct}>
+                      <SheetHeader>
+                        <SheetTitle>Add a product</SheetTitle>
+                        <SheetDescription></SheetDescription>
+                      </SheetHeader>
+                      <div className="grid gap-4 py-4">
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label htmlFor="name" className="text-right">
+                            Name
+                          </Label>
+                          <Input name="name" id="name" className="col-span-3" />
+                        </div>
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label htmlFor="username" className="text-right">
+                            Status
+                          </Label>
+                          <Select name="status">
+                            <SelectTrigger className="w-[180px]">
+                              <SelectValue defaultValue="Active" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="Active">Active</SelectItem>
+                              <SelectItem value="Draft">Draft</SelectItem>
+                              <SelectItem value="Archived">Archived</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div className="grid grid-cols-4 items-center gap-4">
+                          <Label htmlFor="name" className="text-right">
+                            Price
+                          </Label>
+                          <Input name="price" className="col-span-3" />
+                        </div>
                       </div>
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="username" className="text-right">
-                          Status
-                        </Label>
-                        <Select>
-                          <SelectTrigger className="w-[180px]">
-                            <SelectValue placeholder="Active" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="active">Active</SelectItem>
-                            <SelectItem value="draft">Draft</SelectItem>
-                            <SelectItem value="archived">Archived</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="name" className="text-right">
-                          Price
-                        </Label>
-                        <Input id="price" className="col-span-3" />
-                      </div>
-                    </div>
-                    <SheetFooter>
-                      <SheetClose asChild>
-                        <Button type="submit">add</Button>
-                      </SheetClose>
-                    </SheetFooter>
+                      <SheetFooter>
+                        <SheetClose asChild>
+                          <Button type="submit">add</Button>
+                        </SheetClose>
+                      </SheetFooter>
+                    </form>
                   </SheetContent>
                 </Sheet>
               </div>

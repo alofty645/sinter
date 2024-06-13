@@ -16,9 +16,11 @@ Products
 [x] basic products table
 [x] fetch products from supabase
 [x] basic add product form
-[] add product server action
+[x] add product server action
 [] delete product
 [] edit product
+[] form validation
+[] advanced add product form
 
 Orders
 [] orders table
