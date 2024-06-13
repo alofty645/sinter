@@ -21,17 +21,28 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
-import Link from "next/link";
+import {
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
+
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 import { createClient } from "@/utils/supabase/server";
+import { Select } from "@/components/ui/select";
 
 export default async function Homepage() {
   const supabase = createClient();
@@ -81,12 +92,56 @@ export default async function Homepage() {
                     Export
                   </span>
                 </Button>
-                <Button className="h-8 gap-1" size="sm">
-                  <CirclePlusIcon className="h-3.5 w-3.5" />
-                  <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                    Add Product
-                  </span>
-                </Button>
+                <Sheet>
+                  <SheetTrigger asChild>
+                    <Button className="h-8 gap-1" size="sm">
+                      <CirclePlusIcon className="h-3.5 w-3.5" />
+                      <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                        Add Product
+                      </span>
+                    </Button>
+                  </SheetTrigger>
+                  <SheetContent>
+                    <SheetHeader>
+                      <SheetTitle>Add a product</SheetTitle>
+                      <SheetDescription></SheetDescription>
+                    </SheetHeader>
+                    <div className="grid gap-4 py-4">
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="name" className="text-right">
+                          Product
+                        </Label>
+                        <Input id="name" className="col-span-3" />
+                      </div>
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="username" className="text-right">
+                          Status
+                        </Label>
+                        <Select>
+                          <SelectTrigger className="w-[180px]">
+                            <SelectValue placeholder="Active" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="active">Active</SelectItem>
+                            <SelectItem value="draft">Draft</SelectItem>
+                            <SelectItem value="archived">Archived</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="grid grid-cols-4 items-center gap-4">
+                        <Label htmlFor="name" className="text-right">
+                          Price
+                        </Label>
+                        <Input id="price" className="col-span-3" />
+                      </div>
+                    </div>
+                    <SheetFooter>
+                      <SheetClose asChild>
+                        <Button type="submit">add</Button>
+                      </SheetClose>
+                    </SheetFooter>
+                  </SheetContent>
+                </Sheet>
               </div>
             </div>
             <TabsContent value="all">
@@ -112,7 +167,7 @@ export default async function Homepage() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {products.map((product) => (
+                      {products!.map((product) => (
                         <TableRow key={product.id}>
                           <TableCell className="font-medium">
                             {product.name}
