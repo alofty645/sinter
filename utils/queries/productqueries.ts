@@ -31,16 +31,18 @@ const deleteProduct = async (product_id: string) => {
   revalidatePath("/products");
 };
 
-const editProduct = async (id: string, formData: FormData) => {
+const editProduct = async (formData: FormData) => {
   "use server";
   const supabase = createClient();
   const name = formData.get("name");
   const status = formData.get("status");
   const price = formData.get("price");
+  const product_id = formData.get("product_id");
+
   await supabase
     .from("products")
-    .update({ name: name, status: status, price: price })
-    .eq("id", id);
+    .update({ name: name, status: status, price: price });
+
   revalidatePath("/products");
 };
 

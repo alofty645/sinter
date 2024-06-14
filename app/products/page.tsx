@@ -215,7 +215,83 @@ export default async function Homepage() {
                               <DropdownMenuContent align="end">
                                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
-                                <DropdownMenuItem>Edit</DropdownMenuItem>
+                                <Sheet>
+                                  <SheetTrigger asChild>
+                                    <Button className="h-8 gap-1" size="sm">
+                                      <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                                        Edit
+                                      </span>
+                                    </Button>
+                                  </SheetTrigger>
+                                  <SheetContent>
+                                    <form>
+                                      <SheetHeader>
+                                        <SheetTitle>Edit product</SheetTitle>
+                                        <SheetDescription></SheetDescription>
+                                      </SheetHeader>
+                                      <div className="grid gap-4 py-4">
+                                        <div className="grid grid-cols-4 items-center gap-4">
+                                          <Label
+                                            htmlFor="name"
+                                            className="text-right"
+                                          >
+                                            Name
+                                          </Label>
+                                          <Input
+                                            name="name"
+                                            id="name"
+                                            className="col-span-3"
+                                            defaultValue={product.name}
+                                          />
+                                        </div>
+                                        <div className="grid grid-cols-4 items-center gap-4">
+                                          <Label
+                                            htmlFor="username"
+                                            className="text-right"
+                                          >
+                                            Status
+                                          </Label>
+                                          <Select name="status">
+                                            <SelectTrigger className="w-[180px]">
+                                              <SelectValue
+                                                defaultValue={product.status}
+                                              />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                              <SelectItem value="Active">
+                                                Active
+                                              </SelectItem>
+                                              <SelectItem value="Draft">
+                                                Draft
+                                              </SelectItem>
+                                              <SelectItem value="Archived">
+                                                Archived
+                                              </SelectItem>
+                                            </SelectContent>
+                                          </Select>
+                                        </div>
+                                        <div className="grid grid-cols-4 items-center gap-4">
+                                          <Label
+                                            htmlFor="name"
+                                            className="text-right"
+                                          >
+                                            Price
+                                          </Label>
+                                          <Input
+                                            name="price"
+                                            className="col-span-3"
+                                            defaultValue={product.price}
+                                          />
+                                        </div>
+                                      </div>
+                                      <SheetFooter>
+                                        <SheetClose asChild>
+                                          <Button type="submit">update</Button>
+                                        </SheetClose>
+                                      </SheetFooter>
+                                    </form>
+                                  </SheetContent>
+                                </Sheet>
 
                                 <DropdownMenuItem>Delete</DropdownMenuItem>
                               </DropdownMenuContent>
