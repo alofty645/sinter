@@ -217,11 +217,7 @@ export default async function Homepage() {
 
                                 <DropdownMenuItem>Edit</DropdownMenuItem>
 
-                                <DropdownMenuItem
-                                  }
-                                >
-                                  Delete
-                                </DropdownMenuItem>
+                                <DropdownMenuItem>Delete</DropdownMenuItem>
                               </DropdownMenuContent>
                             </DropdownMenu>
                           </TableCell>
