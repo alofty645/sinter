@@ -57,6 +57,16 @@ import {
   addProduct,
   fetchProducts,
 } from "@/utils/queries/productqueries";
+import { Dialog } from "@/components/ui/dialog";
+import {
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog";
 
 export default async function Homepage() {
   const products = await fetchProducts();
@@ -216,10 +226,8 @@ export default async function Homepage() {
                                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
                                 <Sheet>
-                                  <SheetTrigger asChild>
-                                    <Button className="h-8 gap-1" size="sm">
-                                      Edit
-                                    </Button>
+                                  <SheetTrigger asChild className="mx-2">
+                                    <Button>Edit</Button>
                                   </SheetTrigger>
                                   <SheetContent>
                                     <form action={editProduct}>
@@ -296,16 +304,33 @@ export default async function Homepage() {
                                   </SheetContent>
                                 </Sheet>
 
-                                <DropdownMenuItem asChild>
-                                  <form action={deleteProduct}>
-                                    <input
-                                      type="hidden"
-                                      name="product_id"
-                                      value={product.product_id}
-                                    />
+                                <Dialog>
+                                  <DialogTrigger asChild>
                                     <Button>Delete</Button>
-                                  </form>
-                                </DropdownMenuItem>
+                                  </DialogTrigger>
+                                  <DialogContent>
+                                    <DialogHeader>
+                                      <DialogTitle>Delete product</DialogTitle>
+                                      <DialogDescription>
+                                        Are you sure you want to delete this
+                                        product?
+                                      </DialogDescription>
+                                    </DialogHeader>
+                                    <DialogFooter>
+                                      <DialogClose asChild>
+                                        <form action={deleteProduct}>
+                                          <input
+                                            type="hidden"
+                                            name="product_id"
+                                            value={product.product_id}
+                                          />
+
+                                          <Button type="submit">Delete</Button>
+                                        </form>
+                                      </DialogClose>
+                                    </DialogFooter>
+                                  </DialogContent>
+                                </Dialog>
                               </DropdownMenuContent>
                             </DropdownMenu>
                           </TableCell>
