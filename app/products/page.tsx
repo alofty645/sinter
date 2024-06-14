@@ -74,6 +74,10 @@ const editProduct = async (id: string, formData: FormData) => {
     .eq("id", id);
 };
 
+const deleteProduct = async (product_id: string) => {
+  const supabase = createClient();
+  await supabase.from("products").delete().eq("product_id", product_id);
+};
 export default async function Homepage() {
   const supabase = createClient();
   const { data: products } = await supabase.from("products").select();
@@ -227,7 +231,9 @@ export default async function Homepage() {
 
                               <DropdownMenuContent align="end">
                                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
+
                                 <DropdownMenuItem>Edit</DropdownMenuItem>
+
                                 <DropdownMenuItem>Delete</DropdownMenuItem>
                               </DropdownMenuContent>
                             </DropdownMenu>
