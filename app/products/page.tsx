@@ -140,7 +140,7 @@ export default async function Homepage() {
                           <Label htmlFor="username" className="text-right">
                             Status
                           </Label>
-                          <Select name="status">
+                          <Select name="status ">
                             <SelectTrigger className="w-[180px]">
                               <SelectValue defaultValue="Active" />
                             </SelectTrigger>
@@ -262,11 +262,12 @@ export default async function Homepage() {
                                           >
                                             Status
                                           </Label>
-                                          <Select name="status">
+                                          <Select
+                                            name="status"
+                                            defaultValue={product.status}
+                                          >
                                             <SelectTrigger className="w-[180px]">
-                                              <SelectValue
-                                                defaultValue={product.status}
-                                              />
+                                              <SelectValue />
                                             </SelectTrigger>
                                             <SelectContent>
                                               <SelectItem value="Active">

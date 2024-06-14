@@ -26,15 +26,21 @@ const editProduct = async (formData: FormData) => {
   "use server";
 
   const supabase = createClient();
-  const name = formData.get("name");
-  const status = formData.get("status");
-  const price = formData.get("price");
-  const product_id = formData.get("product_id");
+  const product = {
+    name: formData.get("name"),
+    status: formData.get("status"),
+    price: formData.get("price"),
+    product_id: formData.get("product_id"),
+  };
 
   await supabase
     .from("products")
-    .update({ name: name, status: status, price: price })
-    .eq("product_id", product_id)
+    .update({
+      name: product.name,
+      status: product.status,
+      price: product.price,
+    })
+    .eq("product_id", product.product_id)
     .select();
 
   revalidatePath("/products");
@@ -43,12 +49,19 @@ const editProduct = async (formData: FormData) => {
 const addProduct = async (formData: FormData) => {
   "use server";
   const supabase = createClient();
-  const name = formData.get("name");
-  const status = formData.get("status");
-  const price = formData.get("price");
-  await supabase
-    .from("products")
-    .insert([{ name: name, status: status, price: price, in_stock: 0 }]);
+  const product = {
+    name: formData.get("name"),
+    status: formData.get("status"),
+    price: formData.get("price"),
+  };
+  await supabase.from("products").insert([
+    {
+      name: product.name,
+      status: product.status,
+      price: product.price,
+      in_stock: 0,
+    },
+  ]);
   fetchProducts();
   revalidatePath("/products");
 };
