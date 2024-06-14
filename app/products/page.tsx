@@ -51,36 +51,15 @@ import { Input } from "@/components/ui/input";
 import { createClient } from "@/utils/supabase/server";
 import { Select } from "@/components/ui/select";
 
-const addProduct = async (formData: FormData) => {
-  "use server";
-  const supabase = createClient();
-  const name = formData.get("name");
-  const status = formData.get("status");
-  const price = formData.get("price");
-  await supabase
-    .from("products")
-    .insert([{ name: name, status: status, price: price }]);
-};
+import {
+  deleteProduct,
+  editProduct,
+  addProduct,
+  fetchProducts,
+} from "@/utils/queries/productqueries";
 
-const editProduct = async (id: string, formData: FormData) => {
-  "use server";
-  const supabase = createClient();
-  const name = formData.get("name");
-  const status = formData.get("status");
-  const price = formData.get("price");
-  await supabase
-    .from("products")
-    .update({ name: name, status: status, price: price })
-    .eq("id", id);
-};
-
-const deleteProduct = async (product_id: string) => {
-  const supabase = createClient();
-  await supabase.from("products").delete().eq("product_id", product_id);
-};
 export default async function Homepage() {
-  const supabase = createClient();
-  const { data: products } = await supabase.from("products").select();
+  const products = await fetchProducts();
 
   return (
     <div className="bg-muted/40 flex min-h-screen w-full flex-col">
@@ -188,6 +167,7 @@ export default async function Homepage() {
                   <Table>
                     <TableHeader>
                       <TableRow>
+                        <TableHead>Product ID</TableHead>
                         <TableHead>Name</TableHead>
                         <TableHead>Status</TableHead>
                         <TableHead className="hidden md:table-cell">
@@ -204,6 +184,9 @@ export default async function Homepage() {
                     <TableBody>
                       {products!.map((product) => (
                         <TableRow key={product.product_id}>
+                          <TableCell className="font-medium">
+                            {product.product_id}
+                          </TableCell>
                           <TableCell className="font-medium">
                             {product.name}
                           </TableCell>
@@ -234,7 +217,11 @@ export default async function Homepage() {
 
                                 <DropdownMenuItem>Edit</DropdownMenuItem>
 
-                                <DropdownMenuItem>Delete</DropdownMenuItem>
+                                <DropdownMenuItem
+                                  }
+                                >
+                                  Delete
+                                </DropdownMenuItem>
                               </DropdownMenuContent>
                             </DropdownMenu>
                           </TableCell>
