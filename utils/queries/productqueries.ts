@@ -4,35 +4,27 @@ import { revalidatePath } from "next/cache";
 const fetchProducts = async () => {
   "use server";
   const supabase = createClient();
-  const { data: products } = await supabase.from("products").select();
+  const { data: products } = await supabase
+    .from("products")
+    .select()
+    .order("product_id", { ascending: true });
   return products;
 };
 
-const deleteProduct = async (product_id: string) => {
+const deleteProduct = async (formData: FormData) => {
   "use server";
-
-  console.log("Deleting product with ID:", product_id);
-  console.log("Type of product_id:", typeof product_id);
+  const product_id = formData.get("product_id");
 
   const supabase = createClient();
 
-  const { data, error } = await supabase
-    .from("products")
-    .delete()
-    .eq("product_id", product_id);
+  await supabase.from("products").delete().eq("product_id", product_id);
 
-  if (error) {
-    console.error("Delete error:", error.message);
-  } else if (data) {
-    console.log("Delete successful:", data);
-  } else {
-    console.warn("No records deleted. Check if the product_id exists.");
-  }
   revalidatePath("/products");
 };
 
 const editProduct = async (formData: FormData) => {
   "use server";
+
   const supabase = createClient();
   const name = formData.get("name");
   const status = formData.get("status");
@@ -41,7 +33,9 @@ const editProduct = async (formData: FormData) => {
 
   await supabase
     .from("products")
-    .update({ name: name, status: status, price: price });
+    .update({ name: name, status: status, price: price })
+    .eq("product_id", product_id)
+    .select();
 
   revalidatePath("/products");
 };
@@ -54,7 +48,8 @@ const addProduct = async (formData: FormData) => {
   const price = formData.get("price");
   await supabase
     .from("products")
-    .insert([{ name: name, status: status, price: price }]);
+    .insert([{ name: name, status: status, price: price, in_stock: 0 }]);
+  fetchProducts();
   revalidatePath("/products");
 };
 

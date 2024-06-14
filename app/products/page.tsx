@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-
 import {
   DropdownMenuTrigger,
   DropdownMenuLabel,
@@ -36,6 +35,7 @@ import {
   SelectValue,
   SelectContent,
   SelectItem,
+  SelectLabel,
 } from "@/components/ui/select";
 
 import {
@@ -218,13 +218,16 @@ export default async function Homepage() {
                                 <Sheet>
                                   <SheetTrigger asChild>
                                     <Button className="h-8 gap-1" size="sm">
-                                      <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                                        Edit
-                                      </span>
+                                      Edit
                                     </Button>
                                   </SheetTrigger>
                                   <SheetContent>
-                                    <form>
+                                    <form action={editProduct}>
+                                      <input
+                                        type="hidden"
+                                        name="product_id"
+                                        value={product.product_id}
+                                      />
                                       <SheetHeader>
                                         <SheetTitle>Edit product</SheetTitle>
                                         <SheetDescription></SheetDescription>
@@ -246,7 +249,7 @@ export default async function Homepage() {
                                         </div>
                                         <div className="grid grid-cols-4 items-center gap-4">
                                           <Label
-                                            htmlFor="username"
+                                            htmlFor="status"
                                             className="text-right"
                                           >
                                             Status
@@ -272,7 +275,7 @@ export default async function Homepage() {
                                         </div>
                                         <div className="grid grid-cols-4 items-center gap-4">
                                           <Label
-                                            htmlFor="name"
+                                            htmlFor="price"
                                             className="text-right"
                                           >
                                             Price
@@ -293,7 +296,16 @@ export default async function Homepage() {
                                   </SheetContent>
                                 </Sheet>
 
-                                <DropdownMenuItem>Delete</DropdownMenuItem>
+                                <DropdownMenuItem asChild>
+                                  <form action={deleteProduct}>
+                                    <input
+                                      type="hidden"
+                                      name="product_id"
+                                      value={product.product_id}
+                                    />
+                                    <Button>Delete</Button>
+                                  </form>
+                                </DropdownMenuItem>
                               </DropdownMenuContent>
                             </DropdownMenu>
                           </TableCell>
